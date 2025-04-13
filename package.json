@@ -1,0 +1,88 @@
+{
+  "name": "vite-plugin-css-sourcemap",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "lint-staged": {
+    "**/*.js": [
+      "prettier --write"
+    ],
+    "**/*.ts": [
+      "prettier --write"
+    ]
+  },
+  "scripts": {
+    "ci:build": "npm run build && npm run check-format && npm run check-exports && npm run lint && npm run test",
+    "dev": "vite",
+    "build": "tsup",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "check-exports": "attw --pack .",
+    "lint": "prettier --check . && tsc",
+    "lint:fix": "prettier --write .",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run ci:build",
+    "playground:dev": "cd playground && vite",
+    "playground:build": "cd playground && tsc && vite build",
+    "playground:preview": "cd playground && vite preview",
+    "playground:build:serve": "npm run playground:build && npm run playground:preview",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarioCadenas/vite-plugin-css-sourcemap.git"
+  },
+  "keywords": [
+    "vite",
+    "rollup",
+    "vite-plugin",
+    "css",
+    "sourcemap"
+  ],
+  "author": "Mario Cadenas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarioCadenas/vite-plugin-css-sourcemap/issues"
+  },
+  "homepage": "https://github.com/MarioCadenas/vite-plugin-css-sourcemap#readme",
+  "description": "A Vite plugin for handling CSS sourcemaps",
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.17.4",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/npm": "^12.0.1",
+    "@types/node": "^20.11.24",
+    "@types/rimraf": "^3.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.0.0",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.4.0",
+    "typescript": "^5.2.2",
+    "vite": "^6.2.6",
+    "vitest": "^3.1.1"
+  },
+  "dependencies": {
+    "merge-source-map": "^1.1.0"
+  }
+}
