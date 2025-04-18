@@ -1,3 +1,6 @@
+# Do not use this repo. Use the original repo instead.
+This is just here to test the plugin with some changes.
+
 # vite-plugin-css-sourcemap
 
 A Vite plugin for handling CSS sourcemaps. This plugin ensures that CSS sourcemaps are properly generated and referenced in your Vite builds.
