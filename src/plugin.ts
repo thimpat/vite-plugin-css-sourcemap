@@ -196,8 +196,6 @@ export default function cssSourcemapPlugin(
               const generatedMap = (bundle[mapFileName] as PreRenderedAsset)
                 ?.source;
 
-              delete bundle[mapFileName];
-
               return mergeSourceMap(mergedMap, generatedMap);
             },
             null,
