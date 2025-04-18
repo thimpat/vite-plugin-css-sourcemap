@@ -156,8 +156,12 @@ export default function cssSourcemapPlugin(
 
       return null;
     },
-
-    async transform(code, id) {
+    /**
+     * Original version
+     * @param code
+     * @param id
+     */
+    async transformOriginal(code, id) {
       if (hasValidExtension(id, extensions)) {
         const fileName = path.parse(id).name.replace('.module', '');
         const combinedSourcemap = this.getCombinedSourcemap();
@@ -177,7 +181,28 @@ export default function cssSourcemapPlugin(
 
       return null;
     },
-
+    /**
+     * Modified version
+     *
+     */
+    async transform(code, id) {
+      if (hasValidExtension(id, extensions)) {
+        const combinedSourcemap = this.getCombinedSourcemap();
+        if (id.endsWith('.css') || id.endsWith('.scss')) {
+          idToMap.set(id, combinedSourcemap);
+          return {
+            code,
+            map: combinedSourcemap,
+          };
+        }
+        idToMap.set(id, combinedSourcemap);
+        return {
+          code,
+          map: combinedSourcemap,
+        };
+      }
+      return null;
+    },
     async generateBundle(_: NormalizedOutputOptions, bundle: OutputBundle) {
       const fullPath = extractFullPath(outputOptions!, templateName);
 
