@@ -206,6 +206,11 @@ export default function cssSourcemapPlugin(
           const mapReferencePath = path.basename(newMapFileName);
           const outputPath = path.dirname(newMapFileName);
 
+          if (!finalSourceMap) {
+            console.warn(`No source map found for ${fileName}`);
+            continue;
+          }
+
           this.emitFile({
             type: 'asset',
             fileName: path.join(outputPath, folder, mapReferencePath),
